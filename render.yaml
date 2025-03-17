@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: my-django-app  # Имя приложения
+    runtime: python
+    env: python
+    plan: free  # Можно изменить на paid, если нужно больше ресурсов
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn IT.wsgi:application --bind 0.0.0.0:8000"
+    envVars:
+      - key: DATABASE_URL
+        value: "your_database_url"  # Ссылка на базу данных (например, PostgreSQL)
+      - key: SECRET_KEY
+        generateValue: true  # Render автоматически сгенерирует секретный ключ
